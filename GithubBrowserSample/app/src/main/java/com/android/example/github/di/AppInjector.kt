@@ -67,7 +67,7 @@ object AppInjector {
     }
 
     private fun handleActivity(activity: Activity) {
-        if (activity is HasSupportFragmentInjector || activity is Injectable) {
+        if (activity is HasSupportFragmentInjector || activity is com.android.example.di.Injectable) {
             AndroidInjection.inject(activity)
         }
         if (activity is FragmentActivity) {
@@ -79,7 +79,7 @@ object AppInjector {
                             f: Fragment,
                             savedInstanceState: Bundle?
                         ) {
-                            if (f is Injectable) {
+                            if (f is com.android.example.di.Injectable) {
                                 AndroidSupportInjection.inject(f)
                             }
                         }

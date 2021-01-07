@@ -13,5 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+include ':di'
+include ':envvar'
+include ':feature:login'
+include ':executor'
+include ':testing-debug'
+include ':testing-release'
+include ':data:db'
+include ':data:api-builder'
+include ':data:repository'
+include ':model'
+include ':data:api'
 
 include ':app'

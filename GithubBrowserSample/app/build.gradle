@@ -24,7 +24,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.android.example.github.testing.OpenClass'
+    annotation 'com.android.example.testing.OpenClass'
 }
 android {
     compileSdkVersion build_versions.target_sdk
@@ -74,6 +74,18 @@ jacoco {
 }
 
 dependencies {
+    implementation project(":model")
+    implementation project(":data:api-builder")
+    implementation project(":data:repository")
+    implementation project(":data:db")
+    releaseImplementation project(":testing-release")
+    debugImplementation project(":testing-debug")
+    implementation project(":executor")
+    implementation project(":envvar")
+    implementation project(":di")
+
+    implementation project(":feature:login")
+
     implementation deps.app_compat
     implementation deps.recyclerview
     implementation deps.cardview
@@ -81,14 +93,9 @@ dependencies {
     implementation deps.core_ktx
     implementation deps.transition
     implementation deps.navigation.fragment_ktx
-    implementation deps.room.runtime
     implementation deps.lifecycle.livedata_ktx
     implementation deps.lifecycle.runtime_ktx
     implementation deps.lifecycle.java8
-    implementation deps.browser
-    implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
-    implementation deps.okhttp_logging_interceptor
     implementation deps.glide.runtime
 
     implementation deps.dagger.runtime
@@ -100,12 +107,8 @@ dependencies {
 
     implementation deps.timber
 
-    implementation deps.kotpref.core
-    implementation deps.kotpref.initializer
-
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
-    kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
     testImplementation deps.junit

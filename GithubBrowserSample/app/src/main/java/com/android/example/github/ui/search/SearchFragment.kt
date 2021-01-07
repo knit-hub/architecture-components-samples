@@ -34,24 +34,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.example.github.AppExecutors
 import com.android.example.github.R
 import com.android.example.github.binding.FragmentDataBindingComponent
 import com.android.example.github.databinding.SearchFragmentBinding
-import com.android.example.github.di.Injectable
+import com.android.example.di.Injectable
 import com.android.example.github.ui.common.RepoListAdapter
 import com.android.example.github.ui.common.RetryCallback
 import com.android.example.github.util.autoCleared
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class SearchFragment : Fragment(), Injectable {
+class SearchFragment : Fragment(), com.android.example.di.Injectable {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var appExecutors: AppExecutors
+    lateinit var appExecutors: com.android.example.executor.AppExecutors
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

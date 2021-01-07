@@ -19,21 +19,22 @@ package com.android.example.github.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.android.example.github.api.ApiResponse
-import com.android.example.github.api.GithubService
-import com.android.example.github.api.RepoSearchResponse
-import com.android.example.github.db.GithubDb
-import com.android.example.github.db.RepoDao
-import com.android.example.github.util.AbsentLiveData
+import com.android.example.data.api.ApiResponse
+import com.android.example.data.api.GithubService
+import com.android.example.data.api.RepoSearchResponse
+import com.android.example.data.db.GithubDb
+import com.android.example.data.db.RepoDao
+import com.android.example.data.repository.AbsentLiveData
+import com.android.example.data.repository.RepoRepository
 import com.android.example.github.util.ApiUtil.successCall
 import com.android.example.github.util.InstantAppExecutors
 import com.android.example.github.util.TestUtil
 import com.android.example.github.util.argumentCaptor
 import com.android.example.github.util.mock
-import com.android.example.github.vo.Contributor
-import com.android.example.github.vo.Repo
+import com.android.example.model.Repo
 import com.android.example.github.vo.RepoSearchResult
-import com.android.example.github.vo.Resource
+import com.android.example.model.Contributor
+import com.android.example.model.Resource
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -99,7 +100,7 @@ class RepoRepositoryTest {
 
     @Test
     fun loadContributors() {
-        val dbData = MutableLiveData<List<Contributor>>()
+        val dbData = MutableLiveData<List<com.android.example.model.Contributor>>()
         `when`(dao.loadContributors("foo", "bar")).thenReturn(dbData)
 
         val data = repository.loadContributors(
@@ -123,12 +124,12 @@ class RepoRepositoryTest {
 
         verify(observer).onChanged(Resource.loading(null))
 
-        val updatedDbData = MutableLiveData<List<Contributor>>()
+        val updatedDbData = MutableLiveData<List<com.android.example.model.Contributor>>()
         `when`(dao.loadContributors("foo", "bar")).thenReturn(updatedDbData)
         dbData.value = emptyList()
 
         verify(service).getContributors("foo", "bar")
-        val inserted = argumentCaptor<List<Contributor>>()
+        val inserted = argumentCaptor<List<com.android.example.model.Contributor>>()
         // empty list is a workaround for null capture return
         verify(dao).insertContributors(inserted.capture() ?: emptyList())
 

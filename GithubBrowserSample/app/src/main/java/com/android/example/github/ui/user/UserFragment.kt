@@ -30,11 +30,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
-import com.android.example.github.AppExecutors
 import com.android.example.github.R
 import com.android.example.github.binding.FragmentDataBindingComponent
 import com.android.example.github.databinding.UserFragmentBinding
-import com.android.example.github.di.Injectable
+import com.android.example.di.Injectable
 import com.android.example.github.ui.common.RepoListAdapter
 import com.android.example.github.ui.common.RetryCallback
 import com.android.example.github.util.autoCleared
@@ -45,11 +44,11 @@ import com.bumptech.glide.request.target.Target
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class UserFragment : Fragment(), Injectable {
+class UserFragment : Fragment(), com.android.example.di.Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
-    lateinit var appExecutors: AppExecutors
+    lateinit var appExecutors: com.android.example.executor.AppExecutors
 
     var binding by autoCleared<UserFragmentBinding>()
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)

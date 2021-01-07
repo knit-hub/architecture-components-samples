@@ -21,19 +21,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.android.example.github.AppExecutors
+import com.android.example.executor.AppExecutors
 import com.android.example.github.R
 import com.android.example.github.databinding.RepoItemBinding
-import com.android.example.github.vo.Repo
+import com.android.example.model.Repo
 
 /**
  * A RecyclerView adapter for [Repo] class.
  */
 class RepoListAdapter(
-    private val dataBindingComponent: DataBindingComponent,
-    appExecutors: AppExecutors,
-    private val showFullName: Boolean,
-    private val repoClickCallback: ((Repo) -> Unit)?
+        private val dataBindingComponent: DataBindingComponent,
+        appExecutors: com.android.example.executor.AppExecutors,
+        private val showFullName: Boolean,
+        private val repoClickCallback: ((Repo) -> Unit)?
 ) : DataBoundListAdapter<Repo, RepoItemBinding>(
     appExecutors = appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<Repo>() {
